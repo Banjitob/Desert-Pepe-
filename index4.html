@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Pepe ($DSPP) - Official</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Floating Emojis */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .emoji-bg {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 10s infinite ease-in-out;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.95);
+            border-bottom: 1px solid #166534;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #fbbf24, #22c55e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, #fbbf24, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: #a8a29e;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #fbbf24;
+            transform: translateY(-2px);
+        }
+        
+        .buy-button {
+            background: #22c55e;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .buy-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #22c55e;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 4px solid #fbbf24;
+            overflow: hidden;
+            box-shadow: 0 0 40px #fbbf24;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+        }
+        
+        h1 {
+            font-size: 70px;
+            font-weight: bold;
+            margin: 20px 0 10px;
+            background: linear-gradient(to right, #fbbf24, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .ticker {
+            font-size: 30px;
+            color: #4ade80;
+            margin-bottom: 20px;
+        }
+        
+        .tagline {
+            font-size: 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .highlight {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+        
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #22c55e;
+            color: black;
+            padding: 15px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 30px #22c55e;
+        }
+        
+        .btn-secondary {
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            padding: 15px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-5px);
+            background: rgba(59,130,246,0.1);
+        }
+        
+        .btn-x {
+            border: 2px solid #a8a29e;
+            color: #a8a29e;
+            padding: 15px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .btn-x:hover {
+            transform: translateY(-5px);
+            background: rgba(168,162,158,0.1);
+        }
+        
+        /* CA Box */
+        .ca-box {
+            background: #111;
+            border: 2px solid #b45309;
+            border-radius: 15px;
+            padding: 15px;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .ca-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px #fbbf24;
+            border-color: #fbbf24;
+        }
+        
+        .ca-label {
+            color: #a8a29e;
+            font-size: 14px;
+        }
+        
+        .ca-address {
+            color: #4ade80;
+            font-family: monospace;
+        }
+        
+        .ca-copy {
+            background: none;
+            border: none;
+            color: #4ade80;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .ca-copy:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .section-icon {
+            font-size: 60px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .section-icon:hover {
+            transform: scale(1.2);
+        }
+        
+        .card {
+            background: #111;
+            border: 2px solid #92400e;
+            border-radius: 30px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(251,191,36,0.4);
+            border-color: #fbbf24;
+        }
+        
+        /* Grid layouts */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .icon-card {
+            background: #1a1a1a;
+            border: 2px solid #92400e;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px #fbbf24;
+            border-color: #fbbf24;
+        }
+        
+        .icon-card span {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        /* Community Cards */
+        .community-card {
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .community-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px currentColor;
+            border-color: #fbbf24;
+        }
+        
+        .community-card span {
+            font-size: 50px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .community-card h3 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        
+        /* Footer */
+        .footer {
+            border-top: 2px solid #166534;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo div {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #fbbf24, #22c55e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .footer-text {
+            color: #a8a29e;
+            margin: 10px 0;
+        }
+        
+        .footer-ca {
+            color: #fbbf24;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .footer-disclaimer {
+            color: #6b7280;
+            font-size: 12px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 40px; }
+            .section-title { font-size: 35px; }
+            .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Floating Background Emojis -->
+<div id="emojiContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></div>
+
+<!-- Navigation -->
+<nav class="navbar">
+   <div class="logo">
+    <img src="https://i.imgur.com/tMOSocW.jpeg" alt="Desert Pepe Logo" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #fbbf24;">
+    <span class="logo-text">DESERT PEPE</span>
+</div>
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#token">Token</a>
+        <a href="#community">Community</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#buy">Buy</a>
+    </div>
+    <a href="https://pump.fun/coin/CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump" class="buy-button">Buy $DSPP</a>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+   <div class="hero-logo" style="background: none; display: flex; align-items: center; justify-content: center;">
+    <img src="https://i.imgur.com/tMOSocW.jpeg" alt="Desert Pepe Logo" style="width: 100%; height: 100%; object-fit: cover;">
+</div>
+    <h1>DESERT PEPE</h1>
+    <div class="ticker">($DSPP / $DSPP+)</div>
+    <p class="tagline">The frog that conquered the desert.<br><span class="highlight">Memes. Community. Legendary pumps.</span></p>
+    
+    <div class="button-group">
+        <a href="https://pump.fun/coin/CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump" class="btn-primary">🚀 Buy $DSPP</a>
+        <a href="https://t.me/+zTjfNv-r10I2ZmZk" class="btn-secondary">✈️ Join Telegram</a>
+        <a href="https://x.com/desertpepe78080?s=21" class="btn-x">𝕏 Follow X</a>
+    </div>
+    
+    <div class="ca-box" id="caBox">
+        <span class="ca-label">CA:</span>
+        <span class="ca-address">CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump</span>
+        <button class="ca-copy" onclick="copyCA()">📋</button>
+    </div>
+</div>
+
+<!-- About Section -->
+<div id="about" class="section">
+    <div class="section-icon">🌵</div>
+    <h2 class="section-title" style="background: linear-gradient(to right, #fbbf24, #4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">What is Desert Pepe?</h2>
+    
+    <div class="card" style="max-width: 1000px; margin: 0 auto;">
+        <p style="font-size: 24px;">Desert Pepe is a <span style="color: #4ade80;">community-driven memecoin</span> born in the digital desert. Built for memes, pumps, and early believers.</p>
+        <p style="font-size: 28px; color: #fbbf24; margin: 30px 0;">Early holders become Desert Legends. 👑</p>
+        
+        <div class="grid-4">
+            <div class="icon-card"><span>👥</span>Community</div>
+            <div class="icon-card"><span>🐸</span>Memes</div>
+            <div class="icon-card"><span>🎲</span>Degens</div>
+            <div class="icon-card"><span>🏆</span>Early adopters</div>
+        </div>
+        
+        <p style="font-size: 20px; color: #a8a29e;">The desert quest has begun. 🌵</p>
+    </div>
+</div>
+
+<!-- Token Section -->
+<div id="token" class="section">
+    <div class="section-icon">💎</div>
+    <h2 class="section-title" style="background: linear-gradient(to right, #4ade80, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Token Info</h2>
+    
+    <div class="card" style="max-width: 600px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left;">
+            <div><span style="color: #fbbf24;">Token:</span> Desert Pepe</div>
+            <div><span style="color: #fbbf24;">Ticker:</span> $DSPP / $DSPP+</div>
+            <div><span style="color: #fbbf24;">Network:</span> Solana</div>
+            <div><span style="color: #fbbf24;">Platform:</span> Pump.fun</div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: black; border-radius: 15px;">
+            <span style="color: #fbbf24;">CA:</span>
+            <span style="color: #4ade80; font-family: monospace; display: block; margin-top: 10px; word-break: break-all;">CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump</span>
+        </div>
+        
+        <a href="https://pump.fun/coin/CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump" style="display: inline-block; background: #22c55e; color: black; padding: 15px 30px; border-radius: 30px; text-decoration: none; margin-top: 20px; font-weight: bold; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">View on Pump.fun</a>
+    </div>
+</div>
+
+<!-- Community Section -->
+<div id="community" class="section">
+    <div class="section-icon">⚔️</div>
+    <h2 class="section-title" style="color: #fbbf24;">Join the Desert Army</h2>
+    
+    <div class="grid-3" style="max-width: 1000px; margin: 0 auto;">
+        <a href="https://t.me/+zTjfNv-r10I2ZmZk" class="community-card" style="background: #1e3a8a;">
+            <span>✈️</span>
+            <h3>Telegram Army</h3>
+            <p style="opacity: 0.8;">Main chat + alpha</p>
+        </a>
+        
+        <a href="https://t.me/DesertPepeCoin" class="community-card" style="background: #92400e;">
+            <span>🌵</span>
+            <h3>Early Pepes</h3>
+            <p style="opacity: 0.8;">$DSPP+ community</p>
+        </a>
+        
+        <a href="https://x.com/desertpepe78080?s=21" class="community-card" style="background: #44403c;">
+            <span>𝕏</span>
+            <h3>X (Twitter)</h3>
+            <p style="opacity: 0.8;">@desertpepe78080</p>
+        </a>
+    </div>
+</div>
+
+<!-- Roadmap Section -->
+<div id="roadmap" class="section">
+    <div class="section-icon">🗺️</div>
+    <h2 class="section-title" style="color: #fbbf24;">Roadmap</h2>
+    
+    <div class="grid-2" style="max-width: 800px; margin: 0 auto;">
+        <div class="icon-card" style="text-align: left;">
+            <h3 style="color: #fbbf24; font-size: 24px;">🌵 Phase 1: Awakening</h3>
+            <p style="margin-top: 10px;">Launch · Gather early Pepes</p>
+        </div>
+        
+        <div class="icon-card" style="text-align: left;">
+            <h3 style="color: #fbbf24; font-size: 24px;">🔥 Phase 2: Expansion</h3>
+            <p style="margin-top: 10px;">Community growth · First pumps</p>
+        </div>
+        
+        <div class="icon-card" style="text-align: left;">
+            <h3 style="color: #fbbf24; font-size: 24px;">💎 Phase 3: Legend</h3>
+            <p style="margin-top: 10px;">Legendary holders · Desert domination</p>
+        </div>
+        
+        <div class="icon-card" style="text-align: left;">
+            <h3 style="color: #fbbf24; font-size: 24px;">🚀 Phase 4: Moon</h3>
+            <p style="margin-top: 10px;">Meme history · To the moon</p>
+        </div>
+    </div>
+</div>
+
+<!-- Buy Section -->
+<div id="buy" class="section">
+    <div class="section-icon">🚀</div>
+    <h2 class="section-title" style="background: linear-gradient(to right, #4ade80, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Buy $DSPP</h2>
+    <p style="font-size: 24px; color: #fbbf24; text-align: center; margin-bottom: 40px;">4 easy steps</p>
+    
+    <div class="grid-2" style="max-width: 800px; margin: 0 auto;">
+        <div class="icon-card" style="padding: 30px;">
+            <span>1️⃣</span><br>
+            <span style="font-weight: bold;">Install Phantom</span>
+        </div>
+        
+        <div class="icon-card" style="padding: 30px;">
+            <span>2️⃣</span><br>
+            <span style="font-weight: bold;">Get SOL</span>
+        </div>
+        
+        <div class="icon-card" style="padding: 30px;">
+            <span>3️⃣</span><br>
+            <span style="font-weight: bold;">Swap on Pump.fun</span>
+        </div>
+        
+        <div class="icon-card" style="padding: 30px;">
+            <span>4️⃣</span><br>
+            <span style="font-weight: bold;">Join the Army</span>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="https://pump.fun/coin/CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump" style="display: inline-block; background: #22c55e; color: black; padding: 20px 50px; border-radius: 50px; text-decoration: none; font-size: 24px; font-weight: bold; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 0 40px #22c55e'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='none'">BUY NOW</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+   <div class="footer-logo">
+    <img src="https://i.imgur.com/tMOSocW.jpeg" alt="Desert Pepe Logo" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid #fbbf24;">
+    <span style="font-weight: bold; font-size: 18px;">DESERT PEPE</span>
+</div>
+    <p class="footer-text">© 2025 Desert Pepe · 🏜️🐸</p>
+    <p class="footer-ca">CA: CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump</p>
+    <p class="footer-disclaimer">Not financial advice. DYOR.</p>
+</footer>
+
+<script>
+// Create floating emojis
+function createEmojis() {
+    const container = document.getElementById('emojiContainer');
+    const emojis = ['🐸', '🌵', '🏜️', '💎', '🚀', '🐪', '👑', '☀️', '🦂'];
+    
+    for (let i = 0; i < 20; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji-bg';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + '%';
+        emoji.style.top = Math.random() * 100 + '%';
+        emoji.style.fontSize = (20 + Math.random() * 40) + 'px';
+        emoji.style.animationDelay = (Math.random() * 10) + 's';
+        emoji.style.animationDuration = (10 + Math.random() * 15) + 's';
+        container.appendChild(emoji);
+    }
+}
+
+// Copy CA function
+function copyCA() {
+    navigator.clipboard.writeText('CsHpPCXpRyARWzzpnZu11xmDwRezEtytEHHcET24pump').then(function() {
+        alert('✅ CA copied to clipboard!');
+    }).catch(function() {
+        alert('Press Ctrl+C to copy');
+    });
+}
+
+// Start everything when page loads
+window.onload = function() {
+    createEmojis();
+    console.log('Desert Pepe website loaded successfully!');
+};
+</script>
+
+</body>
+</html>
